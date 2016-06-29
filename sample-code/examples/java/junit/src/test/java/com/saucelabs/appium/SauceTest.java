@@ -17,9 +17,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
 
 /**
  * Simple test which demonstrates how to run an <a href="https://github.com/appium/appium">Appium</a>
@@ -35,7 +32,7 @@ import com.saucelabs.junit.SauceOnDemandTestWatcher;
  *
  * @author Ross Rowe
  */
-public class SauceTest implements SauceOnDemandSessionIdProvider {
+public class SauceTest  {
 
     private AppiumDriver<WebElement> driver;
 
@@ -47,18 +44,6 @@ public class SauceTest implements SauceOnDemandSessionIdProvider {
     private String sessionId;
 
     /**
-     * Constructs a {@link SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
-     * supplied by environment variables or from an external file, use the no-arg {@link SauceOnDemandAuthentication} constructor.
-     */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication();
-
-    /**
-     * JUnit Rule which will mark the Sauce Job as passed/failed when the test succeeds or fails.
-     */
-    public @Rule
-    SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
-
-    /**
      * Sets up appium.  You will need to either explictly set the sauce username/access key variables, or set
      * SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables to reference your Sauce account details.
      *
@@ -66,8 +51,8 @@ public class SauceTest implements SauceOnDemandSessionIdProvider {
      */
     @Before
     public void setUp() throws Exception {
-        String sauceUserName = authentication.getUsername();
-        String sauceAccessKey = authentication.getAccessKey();
+        String sauceUserName = "foo";
+        String sauceAccessKey = "bar";
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformVersion", "7.1");
         capabilities.setCapability("deviceName", "iPhone Simulator");

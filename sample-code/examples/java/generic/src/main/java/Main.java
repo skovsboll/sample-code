@@ -1,6 +1,3 @@
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -18,22 +15,9 @@ import java.net.URL;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
-public class Main implements SauceOnDemandSessionIdProvider {
-  final private String USERNAME = System.getenv("SAUCE_USERNAME");
-  final private String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-  private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(USERNAME, ACCESS_KEY);
-
+public class Main  {
   private IOSDriver driver;
   private String sessionId;
-
-  @Rule
-  public SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
-  @Override
-  public String getSessionId() {
-    return sessionId;
-  }
-
-  public @Rule TestName name = new TestName();
 
   @Before
   public void setUp() throws MalformedURLException {
@@ -52,7 +36,6 @@ public class Main implements SauceOnDemandSessionIdProvider {
 
   @After
   public void tearDown() {
-    System.out.println("Link to your job: https://saucelabs.com/jobs/" + this.getSessionId());
     driver.quit();
   }
 
