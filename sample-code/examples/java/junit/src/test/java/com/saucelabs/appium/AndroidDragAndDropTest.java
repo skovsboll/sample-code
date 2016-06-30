@@ -22,7 +22,7 @@ import java.net.URL;
 /**
  * Created by saikrisv on 26/04/16.
  */
-public class AndroidDragAndDrop {
+public class AndroidDragAndDropTest {
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
 

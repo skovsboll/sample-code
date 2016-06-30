@@ -42,7 +42,7 @@ import org.junit.Rule;
  *  This sample shows how to describe the root element and its nested 
  *  child elements as page/screen object
  */
-public class AndroidPageObjectTest_PageObjectLikeComplexElement {
+public class AndroidPageObjectTest_PageObjectLikeComplexElementTest {
 	@Rule
 	public TestWatcher watcher = Factory.createWatcher();
 

@@ -24,7 +24,7 @@ import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
 import org.junit.rules.TestWatcher;
 import org.junit.Rule;
 
-public class AndroidPageObjectTest_Simple {
+public class AndroidPageObjectTest_SimpleTest {
 	@Rule
 	public TestWatcher watcher = Factory.createWatcher();
 

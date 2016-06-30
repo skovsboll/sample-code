@@ -30,7 +30,7 @@ import org.junit.Rule;
  * This sample just demonstrates that the time out customization/changing
  * works fine
  */
-public class AndroidPageObjectTest_TimeOutManagement {
+public class AndroidPageObjectTest_TimeOutManagementTest {
     @Rule
     public TestWatcher watcher = Factory.createWatcher();
 

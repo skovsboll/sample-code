@@ -39,7 +39,7 @@ import org.junit.Rule;
  *  {@link TestAppScreenSimple}
  *
  */
-public class AndroidPageObjectTest_Chained {
+public class AndroidPageObjectTest_ChainedTest {
 	@Rule
 	public TestWatcher watcher = Factory.createWatcher();
 

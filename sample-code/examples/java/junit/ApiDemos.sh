@@ -7,7 +7,6 @@ rm target/upload/test-classes/com/saucelabs/appium/SauceTest.class
 rm target/upload/test-classes/com/saucelabs/appium/SimpleTest.class
 rm target/upload/test-classes/com/saucelabs/appium/UICatalogTest.class
 rm target/upload/test-classes/com/saucelabs/appium/AndroidWebViewTest.class
-rm -rf target/upload/test-classes/com/saucelabs/appium/page_object/
-
+find target/upload/test-classes/com/saucelabs/appium/ -name "*Test*" -exec rm {} \;
 
 
