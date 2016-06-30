@@ -19,10 +19,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 
 import com.saucelabs.appium.page_object.android.ApiDemosListViewScreenSimple;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
 
 public class AndroidPageObjectTest_Simple {
+	@Rule
+	public TestWatcher watcher = Factory.createWatcher();
 
-	private WebDriver driver;
+	private EnhancedAndroidDriver driver;
 	private ApiDemosListViewScreenSimple apiDemosPageObject;
 	
 	@Before
@@ -32,7 +38,7 @@ public class AndroidPageObjectTest_Simple {
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
 	    capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-	    driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	    driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         
 	    apiDemosPageObject = new ApiDemosListViewScreenSimple();
 	    //This time out is set because test can be run on slow Android SDK emulator

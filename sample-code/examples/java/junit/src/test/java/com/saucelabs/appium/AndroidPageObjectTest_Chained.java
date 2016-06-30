@@ -22,6 +22,12 @@ import com.saucelabs.appium.page_object.android.ApiDemosListViewScreenChaided;
 import com.saucelabs.appium.page_object.android.ApiDemosListViewScreenSimple;
 import com.saucelabs.appium.page_object.ios.TestAppScreenSimple;
 
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
+
 /**
  * Please read about Page Object design pattern here:
  *  https://code.google.com/p/selenium/wiki/PageObjects
@@ -34,8 +40,11 @@ import com.saucelabs.appium.page_object.ios.TestAppScreenSimple;
  *
  */
 public class AndroidPageObjectTest_Chained {
+	@Rule
+	public TestWatcher watcher = Factory.createWatcher();
 
-	private WebDriver driver;
+	private EnhancedAndroidDriver driver;
+
 	private ApiDemosListViewScreenChaided apiDemosPageObject;
 	
 	@Before
@@ -46,7 +55,7 @@ public class AndroidPageObjectTest_Chained {
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
 	    capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-	    driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	    driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         
 	    apiDemosPageObject = new ApiDemosListViewScreenChaided();
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 5, TimeUnit.SECONDS), 

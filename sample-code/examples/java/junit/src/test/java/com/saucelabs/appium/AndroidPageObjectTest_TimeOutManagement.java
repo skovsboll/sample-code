@@ -20,14 +20,21 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
 
 /**
  * This sample just demonstrates that the time out customization/changing
  * works fine
  */
 public class AndroidPageObjectTest_TimeOutManagement {
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
 
-    private WebDriver driver;
+    private EnhancedAndroidDriver driver;
     private PageObjectWithCustomizedTimeOuts pageObjectWithCustomizedTimeOuts;
     private TimeOutDuration timeOutDuration;
     private final static long ACCEPTABLE_DELTA_MILLS = 1500; //Android UIAutomator sometimes
@@ -41,7 +48,7 @@ public class AndroidPageObjectTest_TimeOutManagement {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         timeOutDuration = new TimeOutDuration(1, TimeUnit.SECONDS); /* This object can be passed through
         the constructor of AppiumFieldDecorator. It allows users to set general timeout
         of the waiting for elements conveniently and change it when it is needed.

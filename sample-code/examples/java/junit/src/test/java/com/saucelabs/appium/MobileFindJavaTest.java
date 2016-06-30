@@ -9,15 +9,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
 
 public class MobileFindJavaTest {
+  @Rule
+  public TestWatcher watcher = Factory.createWatcher();
 
-  private AppiumDriver<?>            driver;
+  private EnhancedAndroidDriver driver;
   private static final String     url    = "http://127.0.0.1:4723/wd/hub";
 
   @Test
   public void apiDemo() throws Exception {
+    driver.label("Is there an 'about phone' item");
     driver.scrollTo("about phone");
+    driver.label("Is there an 'bluetooth' item");
     driver.scrollTo("bluetooth");
   }
 
@@ -28,7 +37,7 @@ public class MobileFindJavaTest {
     capabilities.setCapability("deviceName", "Android Emulator");
     capabilities.setCapability("appPackage", "com.android.settings");
     capabilities.setCapability("appActivity", ".Settings");
-    driver = new AndroidDriver<>(new URL(url), capabilities);
+    driver = Factory.createAndroidDriver(new URL(url), capabilities);
   }
 
   @After

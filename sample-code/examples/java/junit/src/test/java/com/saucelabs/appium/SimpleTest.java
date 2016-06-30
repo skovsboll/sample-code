@@ -30,6 +30,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
 /**
  * Simple <a href="https://github.com/appium/appium">Appium</a> test which runs against a local Appium instance deployed
  * with the 'TestApp' iPhone project which is included in the Appium source distribution.

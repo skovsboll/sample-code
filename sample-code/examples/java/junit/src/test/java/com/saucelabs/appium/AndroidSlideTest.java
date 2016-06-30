@@ -12,12 +12,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.net.URL;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
 
 /**
  * Created by saikrisv on 26/04/16.
  */
 public class AndroidSlideTest {
-    private AppiumDriver<WebElement> driver;
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
+
+    private EnhancedAndroidDriver driver;
 
     @Before
     public void setUp() throws Exception {
@@ -30,7 +38,7 @@ public class AndroidSlideTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "io.appium.android.apis");
         capabilities.setCapability("appActivity", ".ApiDemos");
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
 
     @After
@@ -40,12 +48,14 @@ public class AndroidSlideTest {
 
     @Test
     public void testSlider(){
-        driver.findElementByXPath(".//*[@text='Views']").click();
+        driver.scrollTo("Views").click();
         driver.scrollTo("Seek Bar").click();
 
         WebElement slider = driver.findElementById("io.appium.android.apis:id/seek");
         Point sliderLocation = getCenter(slider);
+        driver.label("About to slide");
         driver.swipe(sliderLocation.getX(), sliderLocation.getY(), sliderLocation.getX()-100, sliderLocation.getY(), 7000);
+        driver.label("Sliding is FUN!");
 
     }
 

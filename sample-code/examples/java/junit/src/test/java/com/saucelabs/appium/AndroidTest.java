@@ -14,10 +14,17 @@ import java.net.URL;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
 
 public class AndroidTest {
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
 
-    private AppiumDriver<WebElement> driver;
+    private EnhancedAndroidDriver driver;
 
     @Before
     public void setUp() throws Exception {
@@ -30,7 +37,7 @@ public class AndroidTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "io.appium.android.apis");
         capabilities.setCapability("appActivity", ".ApiDemos");
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
 
     @After
@@ -40,14 +47,19 @@ public class AndroidTest {
 
     @Test
     public void apiDemo(){
-        WebElement el = driver.findElement(By.xpath(".//*[@text=Animation]"));
+        WebElement el = driver.findElement(By.xpath(".//*[@text='Animation']"));
         assertEquals("Animation", el.getText());
+        driver.label("I could find Animation button via XPath");
         el = driver.findElementByClassName("android.widget.TextView");
         assertEquals("API Demos", el.getText());
+        driver.label("The title says API Demos");
         el = driver.findElement(By.xpath(".//*[@text='App']"));
+        driver.label("Found button that reads App, wonder...");
         el.click();
+        driver.label("So this is the App section?");
         List<WebElement> els = driver.findElementsByClassName("android.widget.TextView");
         assertEquals("Activity", els.get(2).getText());
+        driver.label("It do have an Activity item");
     }
 
 }

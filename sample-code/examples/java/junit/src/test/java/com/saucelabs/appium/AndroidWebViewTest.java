@@ -13,9 +13,17 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import com.xamarin.testcloud.appium.Factory;
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
+
 
 public class AndroidWebViewTest {
-    private AppiumDriver<WebElement> driver;
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
+
+    private EnhancedAndroidDriver driver;
 
     @Before
     public void setUp() throws Exception {
@@ -28,7 +36,7 @@ public class AndroidWebViewTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "io.selendroid.testapp");
         capabilities.setCapability("appActivity", ".HomeScreenActivity");
-        driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
     @After
     public void tearDown() throws Exception {
@@ -47,8 +55,10 @@ public class AndroidWebViewTest {
             driver.context(contextName);
           }
         }
+        driver.label("Lets input a name");
         WebElement inputField = driver.findElement(By.id("name_input"));
         inputField.sendKeys("Some name");
+        driver.label("Well some name is also a name");
         inputField.submit();
     }
 
