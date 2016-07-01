@@ -91,6 +91,7 @@
 									<outputDirectory>${project.build.directory}/upload/dependency-jars/</outputDirectory>
 									<useRepositoryLayout>true</useRepositoryLayout>
 									<copyPom>true</copyPom>
+									<addParentPoms>true</addParentPoms>
 								</configuration>
 							</execution>
 						</executions>

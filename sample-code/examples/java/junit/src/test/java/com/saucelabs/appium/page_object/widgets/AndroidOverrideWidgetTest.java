@@ -1,14 +1,14 @@
 package com.saucelabs.appium.page_object.widgets;
 
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.TimeOutDuration;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -20,9 +20,11 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class AndroidOverrideWidgetTest implements WidgetTest{
+public class AndroidOverrideWidgetTest implements WidgetTest  {
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
 
-    private static AndroidDriver<?> driver;
+    private static EnhancedAndroidDriver driver;
     private static RottenTomatoes rottenTomatoes;
 
     @BeforeClass
@@ -33,7 +35,7 @@ public class AndroidOverrideWidgetTest implements WidgetTest{
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
         rottenTomatoes = new RottenTomatoes();
         PageFactory.initElements(new AppiumFieldDecorator(driver, new TimeOutDuration(5, TimeUnit.SECONDS)), rottenTomatoes);
