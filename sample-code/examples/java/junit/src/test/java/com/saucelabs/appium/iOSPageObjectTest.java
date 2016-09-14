@@ -1,5 +1,7 @@
 package com.saucelabs.appium;
 
+import com.xamarin.testcloud.appium.EnhancedIOSDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -8,12 +10,11 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import java.io.File;
 import java.net.URL;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 
@@ -34,8 +35,10 @@ import com.saucelabs.appium.page_object.ios.TestAppScreenSimple;
  *
  */
 public class iOSPageObjectTest {
-	
-	private WebDriver driver;
+	@Rule
+	public TestWatcher watcher = Factory.createWatcher();
+
+	private EnhancedIOSDriver<MobileElement> driver;
 	private TestAppScreenSimple uiTestApp;
 	
 	@Before
@@ -50,7 +53,7 @@ public class iOSPageObjectTest {
 	    capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 	    
 	    uiTestApp = new TestAppScreenSimple();
-	    driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	    driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
 		PageFactory.initElements(new AppiumFieldDecorator(driver), uiTestApp);
 	}

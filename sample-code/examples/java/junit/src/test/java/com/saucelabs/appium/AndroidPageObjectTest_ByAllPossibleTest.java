@@ -77,10 +77,12 @@ public class AndroidPageObjectTest_ByAllPossibleTest {
 	@Test
 	public void findAllElementTest(){
 		Assert.assertNotEquals(null, apiDemosPageObject.findAllElementView.getAttribute("text"));
+		driver.label("Found elements");
 	}	
 	
 	@Test
 	public void findAllElementsTest(){
 		Assert.assertNotEquals(0, apiDemosPageObject.findAllElementViews.size());
-	}	
+		driver.label("Found elements");
+	}
 }

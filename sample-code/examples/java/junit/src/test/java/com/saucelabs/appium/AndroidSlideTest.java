@@ -48,8 +48,11 @@ public class AndroidSlideTest {
 
     @Test
     public void testSlider(){
+        driver.label("App shown");
         driver.scrollTo("Views").click();
+        driver.label("View shown");
         driver.scrollTo("Seek Bar").click();
+        driver.label("Seek Bar shown");
 
         WebElement slider = driver.findElementById("io.appium.android.apis:id/seek");
         Point sliderLocation = getCenter(slider);

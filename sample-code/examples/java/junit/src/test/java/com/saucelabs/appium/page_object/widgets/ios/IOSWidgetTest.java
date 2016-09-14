@@ -21,6 +21,8 @@ import static org.junit.Assert.assertTrue;
 
 public class IOSWidgetTest implements WidgetTest {
 
+
+
     private IOSDriver<?> driver;
     private RottenTomatoesIOSApp rottenTomatoesApp;
 
