@@ -54,8 +54,8 @@ public class SauceTest  {
         String sauceUserName = "foo";
         String sauceAccessKey = "bar";
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformVersion", "7.1");
-        capabilities.setCapability("deviceName", "iPhone Simulator");
+        capabilities.setCapability("platformVersion", "9.3");
+        capabilities.setCapability("deviceName", "iPhone 6");
         capabilities.setCapability("appiumVersion", "1.3.4");
         capabilities.setCapability("app", "https://appium.s3.amazonaws.com/TestApp7.1.app.zip");
 
