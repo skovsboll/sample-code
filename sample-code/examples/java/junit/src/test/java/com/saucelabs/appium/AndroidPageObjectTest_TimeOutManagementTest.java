@@ -62,6 +62,7 @@ public class AndroidPageObjectTest_TimeOutManagementTest {
 
     @After
     public void tearDown() throws Exception {
+        driver.label("Stopping app");
         driver.quit();
     }
 

@@ -5,6 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
+import com.xamarin.testcloud.appium.EnhancedIOSDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
@@ -26,7 +29,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -51,8 +56,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 @SuppressWarnings("deprecation")
 public class UICatalogTest {
+    @Rule
+    TestWatcher watcher = Factory.createWatcher();
 
-    private AppiumDriver<IOSElement> driver;
+    private EnhancedIOSDriver<IOSElement> driver;
 
     private WebElement row;
 
@@ -66,11 +73,12 @@ public class UICatalogTest {
         capabilities.setCapability("platformVersion", "9.3");
         capabilities.setCapability("deviceName", "iPhone 6");
         capabilities.setCapability("app", app.getAbsolutePath());
-        driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
 
     @After
     public void tearDown() throws Exception {
+        driver.label("Stopping app");
         driver.quit();
     }
 

@@ -42,6 +42,7 @@ public class MobileFindJavaTest {
 
   @After
   public void tearDown() throws Exception {
+    driver.label("Stopping app");
     driver.quit();
   }
 }

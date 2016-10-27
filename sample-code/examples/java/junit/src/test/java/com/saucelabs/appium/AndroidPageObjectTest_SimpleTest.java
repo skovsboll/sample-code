@@ -37,8 +37,10 @@ public class AndroidPageObjectTest_SimpleTest {
         File appDir = new File(classpathRoot, "../../../apps/ApiDemos/bin");
 	    File app = new File(appDir, "ApiDemos-debug.apk");
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
-	    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
-	    capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+	    //capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
+		capabilities.setCapability("deviceName", "0819231e00d4caac");
+
+		capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 	    driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         
 	    apiDemosPageObject = new ApiDemosListViewScreenSimple();
@@ -49,6 +51,7 @@ public class AndroidPageObjectTest_SimpleTest {
 	
 	@After
 	public void tearDown() throws Exception {
+		driver.label("Stopping app");
 		driver.quit();
 	}
 	

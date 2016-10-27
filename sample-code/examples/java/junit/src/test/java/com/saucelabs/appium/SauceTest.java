@@ -1,6 +1,10 @@
 package com.saucelabs.appium;
 
 import static org.junit.Assert.assertEquals;
+
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import com.xamarin.testcloud.appium.EnhancedIOSDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 
@@ -14,6 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -33,8 +38,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  * @author Ross Rowe
  */
 public class SauceTest  {
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
 
-    private AppiumDriver<WebElement> driver;
+    private EnhancedIOSDriver<WebElement> driver;
 
     private List<Integer> values;
 
@@ -56,17 +63,17 @@ public class SauceTest  {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformVersion", "9.3");
         capabilities.setCapability("deviceName", "iPhone 6");
-        capabilities.setCapability("appiumVersion", "1.3.4");
+//        capabilities.setCapability("appiumVersion", "1.3.4");
         capabilities.setCapability("app", "https://appium.s3.amazonaws.com/TestApp7.1.app.zip");
 
-        driver = new IOSDriver<WebElement>(new URL(MessageFormat.format("http://{0}:{1}@ondemand.saucelabs.com:80/wd/hub", sauceUserName, sauceAccessKey)),
-                capabilities);
+        driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         this.sessionId = driver.getSessionId().toString();
         values = new ArrayList<Integer>();
     }
 
     @After
     public void tearDown() throws Exception {
+        driver.label("Stopping app");
         driver.quit();
     }
 

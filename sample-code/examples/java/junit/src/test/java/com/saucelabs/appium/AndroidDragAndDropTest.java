@@ -32,8 +32,9 @@ public class AndroidDragAndDropTest {
         File appDir = new File(classpathRoot, "../../../apps/ApiDemos/bin");
         File app = new File(appDir, "ApiDemos-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName","Android Emulator");
-        capabilities.setCapability("platformVersion", "4.4");
+        //capabilities.setCapability("deviceName","Android Emulator");
+        capabilities.setCapability("deviceName", "0819231e00d4caac");
+        //capabilities.setCapability("platformVersion", "4.4");
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "io.appium.android.apis");
         capabilities.setCapability("appActivity", ".ApiDemos");

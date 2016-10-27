@@ -1,11 +1,14 @@
 package com.saucelabs.appium.page_object.widgets;
 
+import com.xamarin.testcloud.appium.EnhancedIOSDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.TimeOutDuration;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -18,8 +21,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class IOSOverrideWidgetTest implements WidgetTest{
+    @Rule
+    TestWatcher watcher = Factory.createWatcher();
 
-    private IOSDriver<?> driver;
+    private EnhancedIOSDriver<?> driver;
     private static RottenTomatoes rottenTomatoes;
 
     @Before
@@ -32,7 +37,7 @@ public class IOSOverrideWidgetTest implements WidgetTest{
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-        driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
         rottenTomatoes = new RottenTomatoes();
         PageFactory.initElements(new AppiumFieldDecorator(driver, new TimeOutDuration(5, TimeUnit.SECONDS)), rottenTomatoes);
@@ -41,6 +46,7 @@ public class IOSOverrideWidgetTest implements WidgetTest{
     @After
     public void tearDown() {
         if (driver != null)
+            driver.label("Stopping app");
             driver.quit();
     }
 

@@ -68,6 +68,7 @@ public class AndroidPageObjectTest_PageObjectLikeComplexElementTest {
 	
 	@After
 	public void tearDown() throws Exception {
+		driver.label("Stopping app");
 		driver.quit();
 	}
 	
@@ -81,17 +82,20 @@ public class AndroidPageObjectTest_PageObjectLikeComplexElementTest {
 	@Test
 	public void findByElementsTest() {
 		Assert.assertNotEquals(0, apiDemosPageObject.textVieWs.size());
+		driver.label("Found elements");
 	}
 
 	@Test
 	public void findByElementTest() {
 		Assert.assertNotEquals(null, apiDemosPageObject.textView.getAttribute("text"));
+		driver.label("Found elements");
 	}
 
 
 	@Test
 	public void androidFindByElementsTest(){
 		Assert.assertNotEquals(0, apiDemosPageObject.androidTextViews.size());
+		driver.label("Found elements");
 	}
 
 	@Test

@@ -64,6 +64,7 @@ public class AndroidPageObjectTest_ChainedTest {
 	
 	@After
 	public void tearDown() throws Exception {
+		driver.label("Stopping app");
 		driver.quit();
 	}
 	
@@ -77,36 +78,30 @@ public class AndroidPageObjectTest_ChainedTest {
 	@Test
 	public void androidChainSearchElementsTest(){
 		Assert.assertNotEquals(0, apiDemosPageObject.chainElementViews.size());
-		driver.label("Found elements");
 	}
 
 	@Test
 	public void androidChainSearchElementTest(){
 		Assert.assertNotEquals(null, apiDemosPageObject.chainElementView.getAttribute("text"));
-		driver.label("Found elements");
 	}
 
 	@Test
 	public void androidOrIOSFindByElementsTest_ChainSearches(){
 		Assert.assertNotEquals(0, apiDemosPageObject.chainAndroidOrIOSUIAutomatorViews.size());
-		driver.label("Found elements");
 	}
 
 	@Test
 	public void androidOrIOSFindByElementTest_ChainSearches(){
 		Assert.assertNotEquals(null, apiDemosPageObject.chainAndroidOrIOSUIAutomatorView.getAttribute("text"));
-		driver.label("Found elements");
 	}
 	
 	@Test
 	public void isAndroidElementTest(){
 		Assert.assertNotEquals(null, apiDemosPageObject.androidElementView.getAttribute("text"));
-		driver.label("Found elements");
 	}
 	
 	@Test
 	public void areAndroidElementsTest(){
 		Assert.assertNotEquals(0, apiDemosPageObject.androidElementViews.size());
-		driver.label("Found elements");
 	}
 }

@@ -2,6 +2,10 @@ package com.saucelabs.appium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
+import com.xamarin.testcloud.appium.EnhancedIOSDriver;
+import com.xamarin.testcloud.appium.Factory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -25,7 +29,9 @@ import org.json.simple.parser.JSONParser;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestWatcher;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -42,8 +48,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 @SuppressWarnings("deprecation")
 public class SimpleTest {
+    @Rule
+    TestWatcher watcher = Factory.createWatcher();
 
-    private AppiumDriver<WebElement> driver;
+    private EnhancedIOSDriver<WebElement> driver;
 
     private List<Integer> values;
 
@@ -59,12 +67,13 @@ public class SimpleTest {
         capabilities.setCapability("platformVersion", "9.3");
         capabilities.setCapability("deviceName", "iPhone 6");
         capabilities.setCapability("app", app.getAbsolutePath());
-        driver = new IOSDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         values = new ArrayList<Integer>();
     }
 
     @After
     public void tearDown() throws Exception {
+        driver.label("Stopping app");
         driver.quit();
     }
 
